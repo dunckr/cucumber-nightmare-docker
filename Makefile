@@ -1,11 +1,6 @@
 NAME=cucumber
 IMAGE=nightmare
-
-if [[ -z `'${uname}' == 'Darwin'` ]]; then \
-	IP=$(shell ifconfig en0 | grep inet | awk '$$1=="inet" {print $$2}'); \
-else; \
-	IP=$(ip route|awk '/default/ { print $3 }'); \
-fi;
+IP=$(shell ifconfig en0 | grep inet | awk '$$1=="inet" {print $$2}')
 
 all: start
 
@@ -34,14 +29,11 @@ start: create
 	@if [[ -z `netstat -an | grep 6000` ]]; then \
 		open -a XQuartz; \
 	fi;
-	@xhost "+${IP}" &>/dev/null;
+	@xhost "+${IP}";
 	@docker start ${NAME};
 
 sh: start
 	@docker exec -it ${NAME} /bin/bash;
-
-test: start
-	@docker exec ${NAME} /bin/bash -c "yarn test";
 
 stop:
 	@docker stop ${NAME};
@@ -50,4 +42,4 @@ rm: stop
 	@docker rm -v ${NAME};
 	@docker rmi -f ${IMAGE};
 
-.PHONY: build create start sh test stop rm
+.PHONY: build create start sh stop rm
