@@ -2,6 +2,8 @@
 
 [Cucumber](https://github.com/cucumber/cucumber-js) tests driven by [Nightmare](http://www.nightmarejs.org/) inside a [Docker](https://docker.com) container.
 
+![](https://raw.githubusercontent.com/dunckr/imgs/master/cucumber-nightmare-docker.gif)
+
 ## Setup
 
 Install [Docker](https://www.docker.com/) and [XQuartz](https://www.xquartz.org/):
