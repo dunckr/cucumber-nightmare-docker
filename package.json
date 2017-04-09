@@ -1,0 +1,14 @@
+{
+	"name": "electron",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"headless": "node index.js",
+		"gui": "GUI=true node index.js"
+	},
+	"dependencies": {
+		"nightmare": "^2.10.0"
+	},
+	"devDependencies": {}
+}
