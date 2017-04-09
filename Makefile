@@ -1,5 +1,5 @@
-NAME=electron
-IMAGE=electron
+NAME=cucumber
+IMAGE=nightmare
 IP=$(shell ifconfig en0 | grep inet | awk '$$1=="inet" {print $$2}')
 
 all: start
@@ -32,14 +32,17 @@ start: create
 	@xhost "+${IP}";
 	@docker start ${NAME};
 
-sh:
-	@docker exec -it ${NAME} /bin/bash
+sh: start
+	@docker exec -it ${NAME} /bin/bash;
+
+test: start
+	@docker exec ${NAME} /bin/bash -c "yarn test";
 
 stop:
-	@docker stop ${NAME}
+	@docker stop ${NAME};
 
 rm: stop
-	@docker rm -v ${NAME}
-	@docker rmi -f ${IMAGE}
+	@docker rm -v ${NAME};
+	@docker rmi -f ${IMAGE};
 
-.PHONY: build create start sh stop rm
+.PHONY: build create start sh test stop rm
