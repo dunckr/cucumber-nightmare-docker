@@ -4,7 +4,7 @@ IMAGE=nightmare
 if [[ -z `'${uname}' == 'Darwin'` ]]; then \
 	IP=$(shell ifconfig en0 | grep inet | awk '$$1=="inet" {print $$2}'); \
 else; \
-	IP=$(shell fconfig eth0 | grep 'inet addr' | cut -d ':' -f 2 | cut -d ' ' -f 1); \
+	IP=$(ip route|awk '/default/ { print $3 }'); \
 fi;
 
 all: start
