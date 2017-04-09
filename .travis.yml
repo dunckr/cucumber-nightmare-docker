@@ -1,11 +1,4 @@
-language: generic
-sudo: required
-services:
-  - docker
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y docker-engine
-install:
-  - make create
-script:
-  - make test
+language: node_js
+node_js:
+  - "7"
+cache: yarn
