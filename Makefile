@@ -29,7 +29,7 @@ start: create
 	@if [[ -z `netstat -an | grep 6000` ]]; then \
 		open -a XQuartz; \
 	fi;
-	@xhost "+${IP}";
+	@xhost "+${IP}" &>/dev/null;
 	@docker start ${NAME};
 
 sh: start
